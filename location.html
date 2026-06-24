@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Location & Contact — Reborn Fitness Studio</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+.contact-form { display: flex; flex-direction: column; gap: 1rem; margin-top: 1.5rem; }
+.contact-form input, .contact-form textarea, .contact-form select {
+  background: var(--dark3); border: 1px solid rgba(255,255,255,0.1);
+  color: var(--white); padding: 0.9rem 1.2rem; border-radius: 2px;
+  font-family: 'Inter', sans-serif; font-size: 0.9rem;
+  transition: border-color 0.3s; outline: none;
+}
+.contact-form input:focus, .contact-form textarea:focus {
+  border-color: var(--yellow);
+}
+.contact-form textarea { min-height: 120px; resize: vertical; }
+.contact-form ::placeholder { color: var(--gray); }
+</style>
+</head>
+<body>
+<div id="scroll-progress"></div>
+<nav>
+  <a href="index.html" class="nav-logo"><img src="images/logo.png" alt="Reborn Fitness Studio"></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="trainers.html">Trainers</a></li>
+    <li><a href="gallery.html">Gallery</a></li>
+    <li><a href="location.html">Location</a></li>
+    <li><a href="booking.html" class="nav-cta">Book Now</a></li>
+  </ul>
+  <div class="hamburger"><span></span><span></span><span></span></div>
+</nav>
+
+<div class="page-hero">
+  <p class="section-eyebrow">Find Us</p>
+  <h1 class="page-hero-title">LOCATION &amp; <span>CONTACT</span></h1>
+  <div class="yellow-line"></div>
+  <p class="section-subtitle" style="margin-top:0.5rem">We're in the heart of Guruvayoor — come find us.</p>
+</div>
+
+<section>
+  <div class="location-grid">
+    <!-- MAP -->
+    <div>
+      <div class="map-container">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3920.5!2d76.0354008!3d10.6038851!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba795ac99dea84f%3A0x7ec0336e0940ab2d!2sReborn%20Fitness!5e0!3m2!1sen!2sin!4v1700000000000"
+          allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+      <a href="https://maps.app.goo.gl/BF3m5HsAiJ5NGsQ28" target="_blank"
+         style="display:inline-flex;align-items:center;gap:0.5rem;color:var(--yellow);margin-top:1rem;font-size:0.82rem;text-decoration:none;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;">
+        <i class="fas fa-external-link-alt"></i> Open in Google Maps
+      </a>
+    </div>
+
+    <!-- INFO -->
+    <div class="location-info">
+      <div class="info-block">
+        <div class="info-block-title"><i class="fas fa-map-marker-alt" style="margin-right:0.4rem"></i>Address</div>
+        <div class="info-block-content">
+          Reborn Fitness Studio<br>
+          Near Guruvayoor Temple East Nada,<br>
+          Guruvayoor, Thrissur District,<br>
+          Kerala — 680 101
+        </div>
+      </div>
+
+      <div class="info-block">
+        <div class="info-block-title"><i class="fas fa-clock" style="margin-right:0.4rem"></i>Opening Hours</div>
+        <div class="info-block-content">
+          <div class="hours-grid">
+            <div class="hours-day">Monday – Friday</div><div class="hours-time">6:00 AM – 10:00 PM</div>
+            <div class="hours-day">Saturday</div><div class="hours-time">6:00 AM – 9:00 PM</div>
+            <div class="hours-day">Sunday</div><div class="hours-time">7:00 AM – 7:00 PM</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-block">
+        <div class="info-block-title"><i class="fas fa-phone" style="margin-right:0.4rem"></i>Get In Touch</div>
+        <div class="info-block-content">
+          📞 <a href="tel:+919876543210" style="color:var(--yellow);text-decoration:none">+91 98765 43210</a><br>
+          ✉️ <a href="mailto:info@rebornfitness.in" style="color:var(--yellow);text-decoration:none">info@rebornfitness.in</a><br><br>
+          <span>Follow us on Instagram for daily training content</span><br>
+          <a href="#" style="color:var(--yellow);text-decoration:none;font-weight:600">@rebornfitnessguruvayoor</a>
+        </div>
+      </div>
+
+      <div class="info-block">
+        <div class="info-block-title"><i class="fas fa-car" style="margin-right:0.4rem"></i>Getting Here</div>
+        <div class="info-block-content">
+          <span>By Road:</span> 2 mins walk from Guruvayoor Bus Stand<br>
+          <span>By Train:</span> 12 km from Guruvayur Railway Station<br>
+          <span>Parking:</span> Free parking available on-site
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT FORM -->
+<section style="padding-top:0">
+  <div style="max-width:600px;margin:0 auto;">
+    <p class="section-eyebrow">Free Consultation</p>
+    <h2 class="section-title">START YOUR <span>JOURNEY</span></h2>
+    <div class="yellow-line"></div>
+    <p style="color:var(--gray);margin-bottom:1rem;">Fill in your details and one of our trainers will reach out within 24 hours.</p>
+    <div class="contact-form">
+      <input type="text" placeholder="Your Name">
+      <input type="tel" placeholder="Phone Number">
+      <input type="email" placeholder="Email Address">
+      <select>
+        <option value="" disabled selected style="color:#888">Choose a Program</option>
+        <option>Bodybuilding</option>
+        <option>Powerlifting</option>
+        <option>Weight Loss</option>
+        <option>Functional Fitness</option>
+        <option>Athletic Performance</option>
+        <option>General Fitness</option>
+      </select>
+      <textarea placeholder="Any goals or questions? Tell us about yourself..."></textarea>
+      <button class="btn-primary" style="border:none;cursor:pointer;font-size:0.9rem;padding:1rem;">
+        Send Message →
+      </button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo"><img src="images/logo.png" alt="Reborn Fitness Studio"></div>
+  <div class="footer-text">© 2025 Reborn Fitness Studio, Guruvayoor, Kerala</div>
+  <div class="footer-socials">
+    <a href="https://www.instagram.com/reborn_fitnesstudio_/" target="_blank"><i class="fab fa-instagram"></i></a>
+    <a href="#"><i class="fab fa-facebook"></i></a>
+    <a href="#"><i class="fab fa-youtube"></i></a>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Book a Session — Reborn Fitness Studio</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+.booking-hero {
+  padding: 10rem 4rem 4rem;
+  background: var(--dark);
+  border-bottom: 1px solid rgba(255,214,0,0.1);
+  text-align: center;
+}
+.booking-wrapper {
+  max-width: 700px; margin: 0 auto; padding: 4rem 2rem;
+}
+.trainer-select-grid {
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; margin-bottom: 2.5rem;
+}
+.trainer-option {
+  background: var(--dark2); border: 2px solid rgba(255,255,255,0.06);
+  border-radius: 2px; padding: 1.2rem 1rem; text-align: center;
+  cursor: pointer; transition: all 0.2s;
+}
+.trainer-option:hover { border-color: rgba(255,214,0,0.4); }
+.trainer-option.selected { border-color: var(--yellow); background: rgba(255,214,0,0.07); }
+.trainer-option-img {
+  width: 64px; height: 64px; border-radius: 50%;
+  object-fit: cover; object-position: top;
+  margin: 0 auto 0.7rem; display: block;
+  border: 2px solid rgba(255,214,0,0.2);
+}
+.trainer-option.selected .trainer-option-img { border-color: var(--yellow); }
+.trainer-option-placeholder {
+  width: 64px; height: 64px; border-radius: 50%;
+  background: var(--dark3); margin: 0 auto 0.7rem;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem;
+  color: rgba(255,214,0,0.3); border: 2px solid rgba(255,214,0,0.1);
+}
+.trainer-option.selected .trainer-option-placeholder { border-color: var(--yellow); color: var(--yellow); }
+.trainer-option-name { font-size: 0.82rem; font-weight: 700; color: var(--white); }
+.trainer-option-role { font-size: 0.68rem; color: var(--gray); margin-top: 0.2rem; letter-spacing: 0.05em; }
+.trainer-option.selected .trainer-option-name { color: var(--yellow); }
+
+.booking-step {
+  margin-bottom: 2rem;
+}
+.step-label {
+  font-size: 0.7rem; letter-spacing: 0.3em; color: var(--yellow);
+  text-transform: uppercase; font-weight: 600; margin-bottom: 1rem;
+  display: flex; align-items: center; gap: 0.8rem;
+}
+.step-num {
+  width: 24px; height: 24px; background: var(--yellow); color: var(--black);
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  font-size: 0.72rem; font-weight: 800; flex-shrink: 0;
+}
+.booking-input {
+  width: 100%; background: var(--dark2);
+  border: 1px solid rgba(255,255,255,0.1); color: var(--white);
+  padding: 1rem 1.2rem; border-radius: 2px;
+  font-family: 'Inter', sans-serif; font-size: 0.95rem;
+  transition: border-color 0.3s; outline: none; margin-bottom: 1rem;
+}
+.booking-input:focus { border-color: var(--yellow); }
+.booking-input::placeholder { color: var(--gray); }
+.time-slots {
+  display: grid; grid-template-columns: repeat(4,1fr); gap: 0.6rem;
+}
+.slot {
+  padding: 0.7rem 0.5rem; text-align: center;
+  background: var(--dark2); border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 2px; cursor: pointer; font-size: 0.8rem;
+  color: var(--gray); transition: all 0.2s; font-weight: 600;
+}
+.slot:hover { border-color: rgba(255,214,0,0.4); color: var(--white); }
+.slot.selected { border-color: var(--yellow); color: var(--yellow); background: rgba(255,214,0,0.07); }
+.slot.unavailable { opacity: 0.3; cursor: not-allowed; text-decoration: line-through; }
+
+.booking-btn {
+  width: 100%; padding: 1.1rem; background: var(--yellow);
+  color: var(--black); font-weight: 800; font-size: 1rem;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  border: none; border-radius: 2px; cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+  display: flex; align-items: center; justify-content: center; gap: 0.7rem;
+  margin-top: 2rem; font-family: 'Inter', sans-serif;
+}
+.booking-btn:hover { background: var(--yellow-dark); transform: translateY(-2px); }
+.booking-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+.success-box {
+  display: none; text-align: center; padding: 3rem 2rem;
+  background: var(--dark2); border: 1px solid rgba(255,214,0,0.3);
+  border-radius: 2px; margin-top: 2rem;
+}
+.success-box.show { display: block; }
+.success-icon { font-size: 3rem; margin-bottom: 1rem; }
+.success-title {
+  font-family: 'Bebas Neue', sans-serif; font-size: 2rem;
+  color: var(--yellow); margin-bottom: 0.5rem;
+}
+.success-text { color: var(--gray); font-size: 0.9rem; line-height: 1.7; }
+
+@media(max-width:600px) {
+  .trainer-select-grid { grid-template-columns: repeat(2,1fr); }
+  .time-slots { grid-template-columns: repeat(3,1fr); }
+  .booking-hero { padding: 8rem 1.5rem 3rem; }
+  .booking-wrapper { padding: 2rem 1rem; }
+}
+</style>
+</head>
+<body>
+<div id="scroll-progress"></div>
+<nav>
+  <a href="index.html" class="nav-logo"><img src="images/logo.png" alt="Reborn Fitness Studio"></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="trainers.html">Trainers</a></li>
+    <li><a href="gallery.html">Gallery</a></li>
+    <li><a href="location.html">Location</a></li>
+    <li><a href="booking.html" class="nav-cta">Book Now</a></li>
+  </ul>
+  <div class="hamburger"><span></span><span></span><span></span></div>
+</nav>
+
+<div class="booking-hero">
+  <p class="section-eyebrow">Reserve Your Spot</p>
+  <h1 class="page-hero-title" style="font-size:clamp(2.5rem,6vw,5rem);">BOOK A <span style="color:var(--yellow)">SESSION</span></h1>
+  <div class="yellow-line" style="margin:1rem auto"></div>
+  <p style="color:var(--gray);font-size:0.95rem;">Pick your trainer, choose a time, and we'll confirm via WhatsApp.</p>
+</div>
+
+<div class="booking-wrapper">
+
+  <!-- STEP 1: TRAINER -->
+  <div class="booking-step">
+    <div class="step-label"><div class="step-num">1</div> Choose Your Trainer</div>
+    <div class="trainer-select-grid">
+      <div class="trainer-option" data-trainer="Thamjid Thachu" data-role="Bodybuilding & Strength" onclick="selectTrainer(this)">
+        <img src="images/thamjid.png" class="trainer-option-img" alt="Thamjid">
+        <div class="trainer-option-name">Thamjid Thachu</div>
+        <div class="trainer-option-role">Bodybuilding</div>
+      </div>
+      <div class="trainer-option" data-trainer="Murali Krishna" data-role="Elite Bodybuilding" onclick="selectTrainer(this)">
+        <img src="images/murali.png" class="trainer-option-img" alt="Murali">
+        <div class="trainer-option-name">Murali Krishna</div>
+        <div class="trainer-option-role">Bodybuilding</div>
+      </div>
+      <div class="trainer-option" data-trainer="Arjun Krishnan" data-role="Powerlifting" onclick="selectTrainer(this)">
+        <div class="trainer-option-placeholder">AK</div>
+        <div class="trainer-option-name">Arjun Krishnan</div>
+        <div class="trainer-option-role">Powerlifting</div>
+      </div>
+      <div class="trainer-option" data-trainer="Devika Nair" data-role="Functional Fitness" onclick="selectTrainer(this)">
+        <div class="trainer-option-placeholder">DN</div>
+        <div class="trainer-option-name">Devika Nair</div>
+        <div class="trainer-option-role">Functional Fitness</div>
+      </div>
+      <div class="trainer-option" data-trainer="Rahul Menon" data-role="Weight Loss" onclick="selectTrainer(this)">
+        <div class="trainer-option-placeholder">RM</div>
+        <div class="trainer-option-name">Rahul Menon</div>
+        <div class="trainer-option-role">Weight Loss</div>
+      </div>
+      <div class="trainer-option" data-trainer="Vishnu Pillai" data-role="Athletic Performance" onclick="selectTrainer(this)">
+        <div class="trainer-option-placeholder">VP</div>
+        <div class="trainer-option-name">Vishnu Pillai</div>
+        <div class="trainer-option-role">Performance</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 2: DATE -->
+  <div class="booking-step">
+    <div class="step-label"><div class="step-num">2</div> Pick a Date</div>
+    <input type="date" class="booking-input" id="booking-date">
+  </div>
+
+  <!-- STEP 3: TIME SLOT -->
+  <div class="booking-step">
+    <div class="step-label"><div class="step-num">3</div> Pick a Time Slot</div>
+    <div class="time-slots">
+      <div class="slot" onclick="selectSlot(this)">6:00 AM</div>
+      <div class="slot" onclick="selectSlot(this)">7:00 AM</div>
+      <div class="slot" onclick="selectSlot(this)">8:00 AM</div>
+      <div class="slot" onclick="selectSlot(this)">9:00 AM</div>
+      <div class="slot" onclick="selectSlot(this)">10:00 AM</div>
+      <div class="slot" onclick="selectSlot(this)">11:00 AM</div>
+      <div class="slot" onclick="selectSlot(this)">4:00 PM</div>
+      <div class="slot" onclick="selectSlot(this)">5:00 PM</div>
+      <div class="slot" onclick="selectSlot(this)">6:00 PM</div>
+      <div class="slot" onclick="selectSlot(this)">7:00 PM</div>
+      <div class="slot" onclick="selectSlot(this)">8:00 PM</div>
+      <div class="slot" onclick="selectSlot(this)">9:00 PM</div>
+    </div>
+  </div>
+
+  <!-- STEP 4: DETAILS -->
+  <div class="booking-step">
+    <div class="step-label"><div class="step-num">4</div> Your Details</div>
+    <input type="text" class="booking-input" id="booking-name" placeholder="Your Full Name">
+    <input type="tel" class="booking-input" id="booking-phone" placeholder="Phone Number (WhatsApp preferred)">
+    <input type="text" class="booking-input" id="booking-goal" placeholder="Your Goal (e.g. weight loss, muscle gain, competition prep)">
+  </div>
+
+  <button class="booking-btn" onclick="submitBooking()">
+    <i class="fab fa-whatsapp" style="font-size:1.2rem"></i>
+    Confirm Booking via WhatsApp
+  </button>
+
+  <div class="success-box" id="success-box">
+    <div class="success-icon">✅</div>
+    <div class="success-title">BOOKING SENT!</div>
+    <p class="success-text">Your session request has been sent to Reborn Fitness Studio via WhatsApp.<br>They'll confirm your slot shortly.</p>
+    <a href="index.html" class="btn-primary" style="margin-top:1.5rem;display:inline-block">Back to Home</a>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-logo"><img src="images/logo.png" alt="Reborn Fitness Studio"></div>
+  <div class="footer-text">© 2025 Reborn Fitness Studio, Guruvayoor, Kerala</div>
+  <div class="footer-socials">
+    <a href="https://www.instagram.com/reborn_fitnesstudio_/" target="_blank"><i class="fab fa-instagram"></i></a>
+    <a href="#"><i class="fab fa-facebook"></i></a>
+    <a href="#"><i class="fab fa-youtube"></i></a>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script src="js/main.js"></script>
+<script>
+const GYM_WHATSAPP = '918156851000';
+
+let selectedTrainer = '';
+let selectedSlot = '';
+
+// Set minimum date to today
+const dateInput = document.getElementById('booking-date');
+const today = new Date().toISOString().split('T')[0];
+dateInput.min = today;
+
+function selectTrainer(el) {
+  document.querySelectorAll('.trainer-option').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+  selectedTrainer = el.dataset.trainer;
+}
+
+function selectSlot(el) {
+  if (el.classList.contains('unavailable')) return;
+  document.querySelectorAll('.slot').forEach(s => s.classList.remove('selected'));
+  el.classList.add('selected');
+  selectedSlot = el.textContent.trim();
+}
+
+function submitBooking() {
+  const name = document.getElementById('booking-name').value.trim();
+  const phone = document.getElementById('booking-phone').value.trim();
+  const date = document.getElementById('booking-date').value;
+  const goal = document.getElementById('booking-goal').value.trim();
+
+  if (!selectedTrainer) { alert('Please select a trainer.'); return; }
+  if (!date) { alert('Please pick a date.'); return; }
+  if (!selectedSlot) { alert('Please pick a time slot.'); return; }
+  if (!name) { alert('Please enter your name.'); return; }
+  if (!phone) { alert('Please enter your phone number.'); return; }
+
+  const formattedDate = new Date(date).toLocaleDateString('en-IN', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
+
+  const message = `🏋️ *NEW BOOKING — REBORN FITNESS STUDIO*
+
+👤 *Name:* ${name}
+📞 *Phone:* ${phone}
+🎯 *Trainer:* ${selectedTrainer}
+📅 *Date:* ${formattedDate}
+⏰ *Time:* ${selectedSlot}
+💪 *Goal:* ${goal || 'Not specified'}
+
+_Sent via Reborn Fitness website_`;
+
+  const encoded = encodeURIComponent(message);
+  const waURL = `https://wa.me/${GYM_WHATSAPP}?text=${encoded}`;
+
+  window.open(waURL, '_blank');
+  document.getElementById('success-box').classList.add('show');
+  document.querySelector('.booking-btn').disabled = true;
+}
+</script>
+</body>
+</html>

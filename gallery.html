@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gallery — Reborn Fitness Studio</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+.lightbox {
+  display: none; position: fixed; inset: 0; z-index: 9000;
+  background: rgba(0,0,0,0.95); align-items: center; justify-content: center;
+}
+.lightbox.active { display: flex; }
+.lightbox-inner { position: relative; max-width: 90vw; max-height: 90vh; }
+.lightbox-inner img { max-width: 100%; max-height: 90vh; object-fit: contain; border: 1px solid rgba(255,214,0,0.2); }
+.lightbox-close {
+  position: absolute; top: -2.5rem; right: 0;
+  color: var(--yellow); font-size: 1.5rem; cursor: pointer;
+  background: none; border: none; font-family: inherit;
+}
+.gallery-cats {
+  display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2rem;
+}
+.gallery-cat-btn {
+  padding: 0.5rem 1.5rem; border: 1px solid rgba(255,255,255,0.15);
+  background: none; color: var(--gray); font-size: 0.78rem;
+  letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer;
+  border-radius: 2px; transition: all 0.3s; font-family: 'Inter', sans-serif;
+}
+.gallery-cat-btn.active, .gallery-cat-btn:hover {
+  border-color: var(--yellow); color: var(--yellow);
+}
+</style>
+</head>
+<body>
+<div id="scroll-progress"></div>
+<nav>
+  <a href="index.html" class="nav-logo"><img src="images/logo.png" alt="Reborn Fitness Studio"></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="trainers.html">Trainers</a></li>
+    <li><a href="gallery.html">Gallery</a></li>
+    <li><a href="location.html">Location</a></li>
+    <li><a href="booking.html" class="nav-cta">Book Now</a></li>
+  </ul>
+  <div class="hamburger"><span></span><span></span><span></span></div>
+</nav>
+
+<div class="page-hero">
+  <p class="section-eyebrow">Behind the Scenes</p>
+  <h1 class="page-hero-title">THE <span>GALLERY</span></h1>
+  <div class="yellow-line"></div>
+  <p class="section-subtitle" style="margin-top:0.5rem">Sweat, iron, and transformation. A glimpse inside Reborn.</p>
+</div>
+
+<section>
+  <div class="gallery-cats">
+    <button class="gallery-cat-btn active">All</button>
+    <button class="gallery-cat-btn">The Gym</button>
+    <button class="gallery-cat-btn">Training</button>
+    <button class="gallery-cat-btn">Competitions</button>
+    <button class="gallery-cat-btn">Transformations</button>
+  </div>
+
+  <div class="gallery-grid">
+    <!-- Real gym photos -->
+    <div class="gallery-item" style="cursor:pointer" onclick="openLightbox(this)">
+      <img src="images/gym1.png" alt="Reborn Fitness Studio — Main Floor">
+      <div class="gallery-overlay"><i class="fas fa-expand"></i></div>
+    </div>
+    <div class="gallery-item" style="cursor:pointer" onclick="openLightbox(this)">
+      <img src="images/gym2.png" alt="Reborn Fitness Studio — Spin Zone">
+      <div class="gallery-overlay"><i class="fas fa-expand"></i></div>
+    </div>
+    <div class="gallery-item" style="cursor:pointer" onclick="openLightbox(this)">
+      <img src="images/gym3.png" alt="Reborn Fitness Studio — Equipment Area">
+      <div class="gallery-overlay"><i class="fas fa-expand"></i></div>
+    </div>
+    <!-- Trainer photos -->
+    <div class="gallery-item" style="cursor:pointer" onclick="openLightbox(this)">
+      <img src="images/thamjid.png" alt="Thamjid Thachu — Head Coach">
+      <div class="gallery-overlay"><i class="fas fa-expand"></i></div>
+    </div>
+    <div class="gallery-item" style="cursor:pointer" onclick="openLightbox(this)">
+      <img src="images/murali.png" alt="Murali Krishna — Elite Coach">
+      <div class="gallery-overlay"><i class="fas fa-expand"></i></div>
+    </div>
+    <!-- Placeholder tiles for remaining slots -->
+    <div class="gallery-item"><div class="gallery-placeholder" style="height:260px;font-size:3rem;">🏋️</div><div class="gallery-overlay"><i class="fas fa-expand"></i></div></div>
+    <div class="gallery-item"><div class="gallery-placeholder" style="height:200px;font-size:3rem;">💪</div><div class="gallery-overlay"><i class="fas fa-expand"></i></div></div>
+    <div class="gallery-item"><div class="gallery-placeholder" style="height:300px;font-size:3rem;">🏆</div><div class="gallery-overlay"><i class="fas fa-expand"></i></div></div>
+  </div>
+
+  <p style="text-align:center;color:var(--gray);margin-top:3rem;font-size:0.85rem;">
+    📸 More photos coming soon — drop additional images into the <code style="color:var(--yellow)">images/</code> folder and add them to the gallery.
+  </p>
+</section>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <div class="lightbox-inner" onclick="event.stopPropagation()">
+    <button class="lightbox-close" onclick="closeLightbox()">✕ Close</button>
+    <img id="lightbox-img" src="" alt="">
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo"><img src="images/logo.png" alt="Reborn Fitness Studio"></div>
+  <div class="footer-text">© 2025 Reborn Fitness Studio, Guruvayoor, Kerala</div>
+  <div class="footer-socials">
+    <a href="https://www.instagram.com/reborn_fitnesstudio_/" target="_blank"><i class="fab fa-instagram"></i></a>
+    <a href="#"><i class="fab fa-facebook"></i></a>
+    <a href="#"><i class="fab fa-youtube"></i></a>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script src="js/main.js"></script>
+<script>
+function openLightbox(el) {
+  const img = el.querySelector('img');
+  if (!img) return;
+  document.getElementById('lightbox-img').src = img.src;
+  document.getElementById('lightbox').classList.add('active');
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('active');
+}
+document.querySelectorAll('.gallery-cat-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.gallery-cat-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  });
+});
+</script>
+</body>
+</html>
